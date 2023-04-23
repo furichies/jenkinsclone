@@ -1,11 +1,12 @@
 pipeline {
     agent  any;
     stages {
-            stage('comprobaciones') {
+        stage('comprobaciones') {
             steps {
                 sh 'whoami'
                 sh 'echo $PATH'
             }
+        }
         stage('Preparando el entorno') {
             steps {
                 sh 'pip install -r requirements.txt'
@@ -22,7 +23,7 @@ pipeline {
             }
         }
    
-    stage('Build') {
+    stage('Construcción del artefacto') {
           agent { 
             node{
               label "DockerServer"; 
@@ -32,7 +33,7 @@ pipeline {
               sh 'docker build https://github.com/richiinstructor/jenkins.git#main -t jenkinsBuild:latest'
           }
       }        
-      stage('Deploy') {
+      stage('Despliegue') {
           agent { 
             node{
               label "DockerServer"; 
