@@ -29,7 +29,7 @@ pipeline {
               }
           }
           steps {
-              sh 'docker build https://github.com/richiinstructor/jenkins.git -t jenkinsBuild:latest'
+              sh 'docker build https://github.com/richiinstructor/jenkins.git#main -t jenkinsBuild:latest'
           }
       }        
       stage('Deploy') {
