@@ -1,6 +1,11 @@
 pipeline {
     agent  any;
     stages {
+            stage('comprobaciones') {
+            steps {
+                sh 'whoami'
+                sh 'echo $PATH'
+            }
         stage('Preparando el entorno') {
             steps {
                 sh 'pip install -r requirements.txt'
@@ -24,7 +29,7 @@ pipeline {
               }
           }
           steps {
-              sh 'docker build https://github.com/AlissonMMenezes/Chapter10.git -t chapter10:latest'
+              sh 'docker build https://github.com/richiinstructor/jenkins.git -t jenkinsBuild:latest'
           }
       }        
       stage('Deploy') {
@@ -34,7 +39,7 @@ pipeline {
               }
           }
           steps {
-              sh 'docker run -tdi -p 5000:5000 chapter10:latest'
+              sh 'docker run -tdi -p 5000:5000 jenkinsBuild:latest'
           }
       }
     }
