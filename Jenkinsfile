@@ -9,8 +9,7 @@ pipeline {
         }
         stage('Preparamos el entorno') {
             steps {
-                sh 'sudo su - jenkins'
-                sh 'whoami'
+
                 sh 'python3 -m pip install -r requirements.txt'
             }
         }
