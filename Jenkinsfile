@@ -1,34 +1,43 @@
 pipeline {
     agent  any;
     stages {
-        stage('Calidad de código') {
+        stage('Preparing the environment') {
             steps {
-                sh 'echo checking la calidad del código'
+                sh 'python3 -m pip install -r requirements.txt'
             }
         }
-        stage('Test Unitario') {
+        stage('Code Quality') {
             steps {
-                sh 'echo comprobando la aplicación'
+                sh 'python3 -m pylint app.py'
             }
         }
-        stage('Build') {
+        stage('Tests') {
             steps {
-                sh 'echo creando paquete de aplicación'
+                sh 'python3 -m pytest'
             }
         }
    
-    stage('Entrega') {
-          
+    stage('Build') {
+          agent { 
+            node{
+              label "DockerServer"; 
+              }
+          }
           steps {
-              sh 'echo realizando la entrega de software'
+              sh 'docker build https://github.com/AlissonMMenezes/Chapter10.git -t chapter10:latest'
           }
       }        
       stage('Deploy') {
-          
+          agent { 
+            node{
+              label "DockerServer"; 
+              }
+          }
           steps {
-              sh 'echo desplegando'
+              sh 'docker run -tdi -p 5000:5000 chapter10:latest'
           }
       }
-    
-	}
+    }
+
 }
+
