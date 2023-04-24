@@ -1,6 +1,12 @@
 pipeline {
     agent  any;
     stages {
+        stage('extracción de información'){
+            steps {
+                sh 'whoami'
+                sh 'echo $PATH'
+            }
+        }
         stage('Preparing the environment') {
             steps {
                 sh 'python3 -m pip install -r requirements.txt'
