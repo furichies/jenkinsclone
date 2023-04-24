@@ -5,7 +5,6 @@ pipeline {
             steps {
                 sh 'whoami'
                 sh 'echo $PATH'
-                sh 'echo ruta es: $PATH y el usuario es $USER'
             }
         }
         stage('Preparamos el entorno') {
