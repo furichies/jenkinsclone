@@ -5,8 +5,6 @@ pipeline {
             steps {
                 sh 'whoami'
                 sh 'echo $PATH'
-                sh 'export PATH=$PATH:/var/jenkins_home/.local/bin/'
-                sh 'echo $PATH'
             }
         }
         stage('Preparamos el entorno') {
