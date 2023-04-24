@@ -1,5 +1,5 @@
 pipeline {
-    agent  {user 'jenkins'}
+    agent any;
     stages {
         stage('Extracción de información'){
             steps {
