@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh 'whoami'
                 sh 'echo $PATH'
-                sh 'PATH=$PATH:/var/jenkins_home/.local/bin/'
+                sh 'export PATH=$PATH:/var/jenkins_home/.local/bin/'
                 sh 'echo $PATH'
             }
         }
